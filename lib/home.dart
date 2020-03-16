@@ -11,12 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+import 'package:Shrine/supplemental/asymmetric_view.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 import 'model/products_repository.dart';
 import 'model/product.dart';
-class HomePage extends StatelessWidget {
+/*class HomePage extends StatelessWidget {
   // TODO: Make a collection of cards (102)
   List<Card> _buildGrideCards(BuildContext context) {
     List<Product> products = ProductsRepository.loadProducts(Category.all);
@@ -33,8 +34,9 @@ class HomePage extends StatelessWidget {
       return Card(
         clipBehavior: Clip.antiAlias,
         // TODO: Adjust card heights
+        elevation: 8.0,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             AspectRatio(
 
@@ -50,18 +52,21 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
                 child: Column(
                   // TODO: Align labels to the bottom and center
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   // Change innermost Column
                   children: <Widget>[
                     Text(
-                      product.name,
-                      style: them.textTheme.title,
+                      product == null ? '' : product.name,
+                      style: them.textTheme.button,
+                      softWrap: false,
+                      overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
-                    SizedBox(height: 8.0,),
+                    SizedBox(height: 4.0,),
                     Text(
-                      formatter.format(product.price),
-                      style: them.textTheme.body2,
+                      product == null ? '' : formatter.format(product.price),
+                      style: them.textTheme.caption,
                     ),
                   ],
                 ),
@@ -121,6 +126,22 @@ class HomePage extends StatelessWidget {
       ),
       // TODO: Set resizeToAvoidBottomInset (101)
       resizeToAvoidBottomInset: false,
+    );
+  }
+} */
+
+class HomePage extends StatelessWidget {
+  //TODO : Add a variable for Category (104)
+  final Category category;
+
+  const HomePage({this.category: Category.all});
+
+  @override
+  Widget build(BuildContext context) {
+    //TODO: Return an AsymmetricView (104)
+    //TODO: Pass Category variable to AsymmetricView (104)
+    return AsymmetricView(
+      products: ProductsRepository.loadProducts(Category.all),
     );
   }
 }

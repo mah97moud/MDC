@@ -26,20 +26,22 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             SizedBox(height: 120.0),
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                filled: true,
-                labelText: "Username",
+            AccentColorOverride(
+              child: TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: "Username",
+                ),
               ),
             ),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                filled: true,
-                labelText: "Passwod",
+            AccentColorOverride(
+              child: TextField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: "Passwod",
+                ),
+                obscureText: true,
               ),
-              obscureText: true,
             ),
             ButtonBar(
               children: <Widget>[
@@ -49,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                     _usernameController.clear();
                     _passwordController.clear();
                   },
+
                 ),
                 RaisedButton(
                   child: Text("NEXT"),
@@ -72,3 +75,24 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 // TODO: Add AccentColorOverride (103)
+
+class AccentColorOverride extends StatelessWidget {
+  const AccentColorOverride({
+    Key key,
+    this.color,
+    this.child,
+  }) : super(key: key);
+
+  final Color color;
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return Theme(
+      child: child,
+      data: Theme.of(context).copyWith(
+        accentColor: color,
+        brightness: Brightness.dark,
+      ),
+    );
+  }
+}
